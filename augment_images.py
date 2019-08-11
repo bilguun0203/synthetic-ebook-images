@@ -10,11 +10,13 @@ os.system("mkdir -p ./dataset/full_augmented")
 os.system("mkdir -p ./dataset/rot_augmented")
 
 seq = iaa.Sequential([
-    iaa.AddToHueAndSaturation((-60, 60)),          # change their color
+    iaa.AddToHueAndSaturation((-60, 60))         , # change their color
     iaa.ElasticTransformation(alpha=90, sigma=16), # water-like effect
-    iaa.Affine(rotate=(-5, 5)),
-    iaa.AdditiveGaussianNoise(scale=(10, 60)),
-    iaa.Crop(percent=(0, 0.2))
+    iaa.Affine(rotate=(-5, 5))                   ,
+    iaa.AdditiveGaussianNoise(scale=(10, 60))    ,
+    iaa.Crop(percent=(0, 0.2))                   , 
+    iaa.Multiply((0.5, 1.5))                     , # dark and light
+    iaa.PiecewiseAffine(scale=(0.01, 0.04))        # little bit wrek
 ], random_order=True)
 
 rot_seq = iaa.Sequential([

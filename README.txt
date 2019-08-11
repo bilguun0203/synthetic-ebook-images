@@ -7,6 +7,7 @@
   - pip install imgaug
  
 # sequences
+  - python collect_arxiv_papers.py
   - python convert_ebooks_2_images.py
   - python augment_images.py
 

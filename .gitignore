@@ -129,3 +129,5 @@ cookie
 dataset/ebooks/
 dataset/images/
 dataset/augmented/
+dataset/full_augmented/
+dataset/rot_augmented/

@@ -10,10 +10,13 @@ os.system("mkdir -p ./dataset/images")
 for pdf_file in os.listdir(pdf_dir):
     if pdf_file.endswith(".pdf"):
         print(pdf_file)
-        pages = convert_from_path(os.path.join(pdf_dir, pdf_file), 300)
-        for page in pages:
-            output = os.path.join('./dataset', 'images', str(page)+".jpg")
-            page.save(output, 'JPEG')
+        try:
+            pages = convert_from_path(os.path.join(pdf_dir, pdf_file), 300)
+            for page in pages:
+                output = os.path.join('./dataset', 'images', str(page)+".jpg")
+                page.save(output, 'JPEG')
+        except:
+            pass
         #print(pages)
 
 

@@ -16,7 +16,7 @@ seq = iaa.Sequential([
     iaa.AdditiveGaussianNoise(scale=(10, 60))    ,
     iaa.Crop(percent=(0, 0.2))                   , 
     iaa.Multiply((0.5, 1.5))                     , # dark and light
-    iaa.PiecewiseAffine(scale=(0.01, 0.04))        # little bit wrek
+    iaa.PiecewiseAffine(scale=(0.005, 0.008))      # little bit wrek
 ], random_order=True)
 
 rot_seq = iaa.Sequential([
@@ -34,15 +34,17 @@ for img_file in os.listdir("./dataset/images"):
         img_path     = os.path.join('dataset', 'images', img_file)
         image        = imageio.imread(img_path)
 
-        for img in rot_augment(image):
-            new_name    = str(uuid.uuid4())+".jpg"
-            out_path    = os.path.join('dataset', 'rot_augmented', new_name)
-            img.save(out_path)
-
         for img in seq_augment(image):
             new_name    = str(uuid.uuid4())+".jpg"
             out_path    = os.path.join('dataset', 'full_augmented', new_name)
             img.save(out_path)
+        print("full augmentation", img_path)
+
+        for img in rot_augment(image):
+            new_name    = str(uuid.uuid4())+".jpg"
+            out_path    = os.path.join('dataset', 'rot_augmented', new_name)
+            img.save(out_path)
+        print("rotation augmentation", img_path)
 
         pass
 
